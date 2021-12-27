@@ -15,6 +15,11 @@ namespace CleanArchitecture.Infrastucture.Data.Context
             public GetJobDbContext(DbContextOptions<GetJobDbContext> options) : base(options) { }
 
             public DbSet<Students> Students { get; set; }
-        }
+        public DbSet<StudentClass> StudentClasses { get; set; }
+        public DbSet<Teachers> Teachers { get; set; }
+        public DbSet<Subjects> Subjects { get; set; }
+        public DbSet<Classes> Classes { get; set; }
+        public DbSet<Classroom> Classroom { get; set; }
+    }
     }
 

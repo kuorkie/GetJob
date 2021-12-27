@@ -1,3 +1,4 @@
+using CleanArchiitecture.Infrastructure.Ioc;
 using CleanArchitecture.Infrastucture.Data.Context;
 using GetJob.Data;
 using Microsoft.AspNetCore.Builder;
@@ -7,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.OpenApi.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -32,11 +34,18 @@ namespace GetJob
 
             services.AddDbContext<ApplicationDbContext>(options =>
                    options.UseSqlServer(Configuration.GetConnectionString("DbConnection")));
+            services.AddSwaggerGen(x =>
+            {
+                x.SwaggerDoc(name: "final", new OpenApiInfo { Title = "Presentation API" });
+            });
+            RegisterServices(services);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
+           
+
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
@@ -60,6 +69,18 @@ namespace GetJob
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
             });
+
+            app.UseSwagger();
+            app.UseSwaggerUI(x =>
+            {
+                x.SwaggerEndpoint(url: "/swagger/final/swagger.json", name: "Final API");
+            });
+        }
+
+    
+        private static void RegisterServices(IServiceCollection services)
+        {
+            DependencyContainer.RegisterServices(services);
         }
     }
 }
