@@ -10,7 +10,7 @@ namespace CleanArchitecture.Application.Interfaces
 {
     public interface IStudentClassesServices
     {
-        ProjectViewModel GetResults();
+        StudentClassesViewModel GetResults();
         IEnumerable<StudentClass> TextSearch(string text);
     }
 }

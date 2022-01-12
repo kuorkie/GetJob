@@ -10,7 +10,7 @@ namespace CleanArchitecture.Application.Interfaces
 {
     public interface IClassesServices
     {
-        ProjectViewModel GetClasses();
+        StudentClassesViewModel GetClasses();
         IEnumerable<Classes> TextSearch(DayOfWeek text);
     }
 }

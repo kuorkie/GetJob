@@ -17,9 +17,9 @@ namespace CleanArchitecture.Application.Services
         {
             _studentClassesRepository = studentClassesRepository;
         }
-        public ProjectViewModel GetResults()
+        public StudentClassesViewModel GetResults()
         {
-            return new ProjectViewModel()
+            return new StudentClassesViewModel()
             {
                 StudentClass = _studentClassesRepository.GetResults()
             };

@@ -18,22 +18,22 @@ namespace GetJob.Controllers
         {
             _studentClassesService = studentClassesService;
         }
+        [HttpGet("search")]
+        public IActionResult TextSearch(string text)
+        {
+            List<StudentClass> result = new List<StudentClass>();
+
+            result = _studentClassesService.TextSearch(text).ToList();
+
+
+            return Ok(result);
+        }
         [HttpGet]
         public IActionResult GetResults()
         {
 
 
             var result = _studentClassesService.GetResults();
-
-
-            return Ok(result);
-        }
-        [HttpGet("search")]
-        public IActionResult TextSearch(string text)
-        {
-            List<StudentClass> result = new List<StudentClass>();
-
-               result = _studentClassesService.TextSearch(text).ToList();
 
 
             return Ok(result);
