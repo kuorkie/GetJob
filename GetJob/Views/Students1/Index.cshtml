@@ -1,4 +1,4 @@
-﻿@model IEnumerable<CleanArchitecture.DomainCore.Models.StudentClass>
+﻿@model IEnumerable<CleanArchitecture.DomainCore.Models.Students>
 
 @{
     ViewData["Title"] = "Index";
@@ -9,7 +9,7 @@
 <p>
     <a asp-action="Create">Create New</a>
 </p>
-<form asp-controller="StudentClasses1" asp-action="Index">
+<form asp-controller="Students1" asp-action="Index">
     <p>
         Title: <input type="text" name="text" />
         <input type="submit" value="Поиск" />
@@ -19,25 +19,23 @@
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.Class.Period)
+                @Html.DisplayNameFor(model => model.Name)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Class.Subjects.Name)
+                @Html.DisplayNameFor(model => model.Surname)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Students.Name)
+                @Html.DisplayNameFor(model => model.Name_of_Course)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Students.Surname)
-            </th>
-
-            <th>
-                @Html.DisplayNameFor(model => model.Class.Classroom.Name)
+                @Html.DisplayNameFor(model => model.Number_of_Course)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Class.Teachers.Surname)
+                @Html.DisplayNameFor(model => model.Date_of_Birth)
             </th>
-           
+            <th>
+                @Html.DisplayNameFor(model => model.Student_Image)
+            </th>
             <th></th>
         </tr>
     </thead>
@@ -45,24 +43,23 @@
 @foreach (var item in Model) {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.Class.Period)
+                @Html.DisplayFor(modelItem => item.Name)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Class.Subjects.Name)
+                @Html.DisplayFor(modelItem => item.Surname)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Students.Name)
+                @Html.DisplayFor(modelItem => item.Name_of_Course)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Students.Surname)
+                @Html.DisplayFor(modelItem => item.Number_of_Course)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Class.Classroom.Name)
+                @Html.DisplayFor(modelItem => item.Date_of_Birth)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Class.Teachers.Surname)
+                @Html.DisplayFor(modelItem => item.Student_Image)
             </td>
-           
             <td>
                 <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
                 <a asp-action="Details" asp-route-id="@item.Id">Details</a> |

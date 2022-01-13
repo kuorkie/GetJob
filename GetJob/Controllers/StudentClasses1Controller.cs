@@ -34,7 +34,7 @@ namespace GetJob.Controllers
                  }
              }*/
 
-            var getJobDbContext = _context.StudentClasses.Include(s => s.Class).Include(s => s.Students).Where(s => s.Students.Name.Contains(text)).Include(s => s.Class.Subjects).Include(s => s.Class.Classroom); ;
+            var getJobDbContext = _context.StudentClasses.Include(s => s.Class).Include(s => s.Students).Where(s => s.Students.Name.Contains(text)).Include(s => s.Class.Subjects).Include(s => s.Class.Classroom).Include(s => s.Class.Teachers); ;
 
 
 
