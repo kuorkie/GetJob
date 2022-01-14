@@ -77,6 +77,9 @@ namespace GetJob.Controllers
             var studentClass = await _context.StudentClasses
                 .Include(s => s.Class)
                 .Include(s => s.Students)
+                .Include(s => s.Class.Subjects)
+                .Include(s => s.Class.Classroom)
+                .Include(s => s.Class.Teachers)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (studentClass == null)
             {

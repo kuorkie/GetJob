@@ -1,13 +1,13 @@
 ﻿@model IEnumerable<CleanArchitecture.DomainCore.Models.StudentClass>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Расписание";
 }
 
-<h1>Index</h1>
+<h4>Расписание студентов</h4>
 
 <p>
-    <a asp-action="Create">Create New</a>
+    <a asp-action="Create">Создать </a>
 </p>
 <form asp-controller="StudentClasses1" asp-action="Index">
     <p>
@@ -19,64 +19,77 @@
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.Class.Time)
+                Неделя
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Class.Period)
-            </th>
-            
-            <th>
-                @Html.DisplayNameFor(model => model.Class.Subjects.Name)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Students.Name)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Students.Surname)
+                Время
             </th>
 
             <th>
-                @Html.DisplayNameFor(model => model.Class.Classroom.Name)
+                Дисциплина
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Class.Teachers.Surname)
+                Имя
+            </th>
+            <th>
+                Фамилия
+            </th>
+            <th>
+                Специальность
+            </th>
+            <th>
+                Курс
+            </th>
+            <th>
+                Кабинет
+            </th>
+            <th>
+                Преподаватель
             </th>
 
             <th></th>
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
+        @foreach (var item in Model)
+        {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.Class.Time)
+                @Html.DisplayFor(modelItem => item.Class.Time, "Неделя")
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Class.Period)
-            </td>
-
-            <td>
-                @Html.DisplayFor(modelItem => item.Class.Subjects.Name)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Students.Name)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Students.Surname)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Class.Classroom.Name)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Class.Teachers.Surname)
+                @Html.DisplayFor(modelItem => item.Class.Period, "Время")
             </td>
 
             <td>
-                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                @Html.DisplayFor(modelItem => item.Class.Subjects.Name, "Дисциплина")
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Students.Name, "Имя ")
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Students.Surname, "Фамилия ")
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Students.Name_of_Course)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Students.Number_of_Course)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Class.Classroom.Name, "Кабинет")
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Class.Teachers.Surname, "Преподаватель")
+            </td>
+
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.Id">Редактировать </a> |
+                <a asp-action="Details" asp-route-id="@item.Id">Детали</a> |
+                <a asp-action="Delete" asp-route-id="@item.Id">Удалить</a>
             </td>
         </tr>
-}
+            
+        }
     </tbody>
 </table>

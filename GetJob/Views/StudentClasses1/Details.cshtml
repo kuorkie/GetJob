@@ -10,17 +10,35 @@
     <h4>StudentClass</h4>
     <hr />
     <dl class="row">
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Class)
+        <dt class="col-sm-2">
+            Неделя
         </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Class.Id)
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Class.Time)
         </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Students)
+        <dt class="col-sm-2">
+            Время
         </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Students.Id)
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Class.Period)
+        </dd>
+        <dt class="col-sm-2">
+            Дисциплина
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Class.Subjects.Name)
+        </dd>
+        <dt class="col-sm-2">
+            Фамилия
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Students.Surname)
+        </dd>
+        <dt class="col-sm-2">
+            Кабинет
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Class.Classroom.Name)
         </dd>
     </dl>
 </div>
