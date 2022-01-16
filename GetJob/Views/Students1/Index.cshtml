@@ -4,7 +4,10 @@
     ViewData["Title"] = "Index";
 }
 
-<h1>Index</h1>
+
+
+<p>Вход только админам </p>
+<h4>Студенты</h4>
 
 <p>
     <a asp-action="Create">Create New</a>
@@ -19,19 +22,19 @@
     <thead>
         <tr>
             <th>
-               Имя
+                Имя
             </th>
             <th>
                 Фамилия
             </th>
             <th>
-               Специальность
+                Специальность
             </th>
             <th>
-               Курс
+                Курс
             </th>
             <th>
-               Дата рождения
+                Дата рождения
             </th>
             <th>
                 Фото
@@ -40,36 +43,37 @@
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Name)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Surname)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Name_of_Course)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Number_of_Course)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Date_of_Birth)
-            </td>
-            <td>
-                
-                @if (item.Student_Image != null)
-                {
-                    <img style='width:80px; height:60px;' src="@Url.Content(item.Student_Image)")" />
-                }
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
-            </td>
-        </tr>
-}
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Surname)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name_of_Course)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Number_of_Course)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Date_of_Birth)
+                </td>
+                <td>
+
+                    @if (item.Student_Image != null)
+                    {
+                        <img style='width:80px; height:60px;' src="@Url.Content(item.Student_Image)" )" />
+                    }
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                    <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                    <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                </td>
+            </tr>
+        }
     </tbody>
 </table>

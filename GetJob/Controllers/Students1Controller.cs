@@ -9,6 +9,7 @@ using CleanArchitecture.DomainCore.Models;
 using CleanArchitecture.Infrastucture.Data.Context;
 using Microsoft.AspNetCore.Authorization;
 using System.IO;
+using System.ComponentModel.DataAnnotations;
 
 namespace GetJob.Controllers
 {
@@ -23,8 +24,10 @@ namespace GetJob.Controllers
 
         // GET: Students1
         [Authorize(Roles = "admin")]
+      
         public async Task<IActionResult> Index(string text)
         {
+            
             var result = new List<Students>();
             /*for(int i = 0; i < result.Count; i++)
             {
@@ -32,7 +35,8 @@ namespace GetJob.Controllers
             }
             */
             result = _context.Students.Where(x => x.Name.Contains(text)).ToList();
-            return View(result);
+           return View(result);
+            
         }
 
         // GET: Students1/Details/5
