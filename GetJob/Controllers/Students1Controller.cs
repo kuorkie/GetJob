@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using CleanArchitecture.DomainCore.Models;
 using CleanArchitecture.Infrastucture.Data.Context;
 using Microsoft.AspNetCore.Authorization;
+using System.IO;
 
 namespace GetJob.Controllers
 {
@@ -25,7 +26,11 @@ namespace GetJob.Controllers
         public async Task<IActionResult> Index(string text)
         {
             var result = new List<Students>();
-
+            /*for(int i = 0; i < result.Count; i++)
+            {
+                result[i].Student_Image =  System.IO.Path.GetFullPath(_context.Students.Find(result[i].Student_Image));
+            }
+            */
             result = _context.Students.Where(x => x.Name.Contains(text)).ToList();
             return View(result);
         }
@@ -63,6 +68,8 @@ namespace GetJob.Controllers
         {
             if (ModelState.IsValid)
             {
+                students.Student_Image= Path.GetFileName(students.Student_Image);
+
                 _context.Add(students);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));

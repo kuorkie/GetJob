@@ -9,6 +9,7 @@ using CleanArchitecture.DomainCore.Models;
 using CleanArchitecture.Infrastucture.Data.Context;
 using Google.Apis.Admin.Directory.directory_v1.Data;
 using Microsoft.AspNetCore.Authorization;
+using System.IO;
 
 namespace GetJob.Controllers
 {
@@ -65,6 +66,7 @@ namespace GetJob.Controllers
         {
             if (ModelState.IsValid)
             {
+                teachers.Teacher_Image = Path.GetFileName(teachers.Teacher_Image);
                 _context.Add(teachers);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
