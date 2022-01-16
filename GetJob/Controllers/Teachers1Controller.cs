@@ -7,6 +7,8 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using CleanArchitecture.DomainCore.Models;
 using CleanArchitecture.Infrastucture.Data.Context;
+using Google.Apis.Admin.Directory.directory_v1.Data;
+using Microsoft.AspNetCore.Authorization;
 
 namespace GetJob.Controllers
 {
@@ -18,14 +20,16 @@ namespace GetJob.Controllers
         {
             _context = context;
         }
-
+        
         // GET: Teachers1
+        
         public async Task<IActionResult> Index(string text)
         {
             var result = new List<Teachers>();
 
             result = _context.Teachers.Where(x => x.Surname.Contains(text)).ToList();
             return View(result);
+            
         }
 
         // GET: Teachers1/Details/5

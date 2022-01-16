@@ -20,7 +20,7 @@ namespace GetJob.Controllers
         }
 
         // GET: StudentClasses1
-        public async Task<IActionResult> Index(string text)
+        public async Task<IActionResult> Index(string text,string text1)
         {
             /* var result = new List<StudentClass>();
              var studs = _context.StudentClasses.ToList();
@@ -34,7 +34,7 @@ namespace GetJob.Controllers
                  }
              }*/
 
-            var getJobDbContext = _context.StudentClasses.Include(s => s.Class).Include(s => s.Students).Where(s => s.Students.Name.Contains(text)).Include(s => s.Class.Subjects).Include(s => s.Class.Classroom).Include(s => s.Class.Teachers); ;
+            var getJobDbContext = _context.StudentClasses.Include(s => s.Class).Include(s => s.Students).Where(s => s.Students.Name.Contains(text)).Where(s => s.Students.Surname.Contains(text1)).Include(s => s.Class.Subjects).Include(s => s.Class.Classroom).Include(s => s.Class.Teachers); ;
 
 
 

@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using CleanArchitecture.DomainCore.Models;
 using CleanArchitecture.Infrastucture.Data.Context;
+using Microsoft.AspNetCore.Authorization;
 
 namespace GetJob.Controllers
 {
@@ -20,6 +21,7 @@ namespace GetJob.Controllers
         }
 
         // GET: Students1
+        [Authorize(Roles = "admin")]
         public async Task<IActionResult> Index(string text)
         {
             var result = new List<Students>();
