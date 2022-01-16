@@ -25,16 +25,18 @@ namespace GetJob.Controllers
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Register(RegisterModel model)
+        public async Task<IActionResult> Register(RegisterModel model,string text)
         {
-            if (ModelState.IsValid)
+            if (ModelState.IsValid )
 {
                 Users user = await _context.Users.FirstOrDefaultAsync(u => u.Email == model.Email);
                 if (user == null)
                 {
 // добавляем пользователя в бд
                     user = new Users { Email = model.Email, Password = model.Password };
-                    Role userStudentRole = await _context.Roles.FirstOrDefaultAsync(r => r.Name == "userStudent");
+                    Role userStudentRole = await _context.Roles.FirstOrDefaultAsync(z => z.Name.Contains(text));
+                    
+                    //Role userStudentRole = await _context.Roles.FirstOrDefaultAsync(r => r.Name == "userStudent");
                     if (userStudentRole != null)
                         user.Role = userStudentRole;
                    _context.Users.Add(user);

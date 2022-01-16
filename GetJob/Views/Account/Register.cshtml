@@ -21,8 +21,19 @@
             <span asp-validation-for="ConfirmPassword" />
         </div>
         <div>
+            <form asp-controller="Account" asp-action="Register">
+                <p>
+                    Вы кто?
+                <p>
+                    <input type="text" name="text" />
+                    </p>
+
+                </p>
+            </form>
+        </div>
+        <div>
             <input type="submit" value="Регистрация" />
         </div>
-      
+
     </div>
 </form>

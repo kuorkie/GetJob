@@ -8,14 +8,18 @@
     <div class="validation" asp-validation-summary="ModelOnly"></div>
     <div>
         <div class="form-group">
-            <label asp-for="Email">Введите Email</label>
-            <input type="text" asp-for="Email" />
-            <span asp-validation-for="Email" />
+            <label asp-for="Email">Email</label>
+            <p>
+                <input type="text" asp-for="Email" />
+                <span asp-validation-for="Email" />
+            </p>
         </div>
         <div class="form-group">
-            <label asp-for="Password">Введите пароль</label>
-            <input asp-for="Password" />
-            <span asp-validation-for="Password" />
+            <label asp-for="Password">Пароль</label>
+            <p>
+                <input asp-for="Password" />
+                <span asp-validation-for="Password" />
+            </p>
         </div>
         <div class="form-group">
             <input type="submit" value="Войти" class="btn" />
