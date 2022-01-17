@@ -90,31 +90,54 @@ namespace GetJob.Controllers
         }
 
         // GET: StudentClasses1/Create
+        [HttpGet]
         public IActionResult Create()
         {
-            ViewData["ClassId"] = new SelectList(_context.Classes, "Id", "Id");
-            ViewData["StudentsId"] = new SelectList(_context.Students, "Id", "Id");
+               
+              ViewData["ClassId"] = new SelectList(_context.Classes, "Id", "Time");
+               ViewData["StudentsId"] = new SelectList(_context.Students, "Id", "Surname");
+           
+
+              
+
+            
             return View();
+
+            
+            
         }
+
+        
 
         // POST: StudentClasses1/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,ClassId,StudentsId")] StudentClass studentClass)
+        public async Task<IActionResult> Create([Bind("Id,ClassId,StudentsId")] StudentClass studentClass,Classes classes)
         {
             if (ModelState.IsValid)
             {
                 _context.Add(studentClass);
+
+               // _context.Add(classes);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
+
             }
-            ViewData["ClassId"] = new SelectList(_context.Classes, "Id", "Id", studentClass.ClassId);
-            ViewData["StudentsId"] = new SelectList(_context.Students, "Id", "Id", studentClass.StudentsId);
+          
+
+                 
+            ViewData["ClassId"] = new SelectList(_context.Classes, "Id", "Time",studentClass.Class.Time);
+
+            ViewData["StudentsId"] = new SelectList(_context.Students, "Id", "Name", studentClass.Students.Name);
+
+            
+          
             return View(studentClass);
         }
 
+       
         // GET: StudentClasses1/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
@@ -128,8 +151,10 @@ namespace GetJob.Controllers
             {
                 return NotFound();
             }
-            ViewData["ClassId"] = new SelectList(_context.Classes, "Id", "Id", studentClass.ClassId);
-            ViewData["StudentsId"] = new SelectList(_context.Students, "Id", "Id", studentClass.StudentsId);
+            PopulateDepartmentsDropDownList(studentClass.ClassId);
+            PopulateDepartmentsDropDownList(studentClass.StudentsId);
+            /*ViewData["ClassId"] = new SelectList(_context.Classes, "Id", "Id", studentClass.ClassId);
+            ViewData["StudentsId"] = new SelectList(_context.Students, "Id", "Id", studentClass.StudentsId);*/
             return View(studentClass);
         }
 
@@ -138,8 +163,37 @@ namespace GetJob.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,ClassId,StudentsId")] StudentClass studentClass)
+        public async Task<IActionResult> Edit(int? id, [Bind("Id,ClassId,StudentsId")] StudentClass studentClass)
         {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var courseToUpdate = await _context.StudentClasses
+                .FirstOrDefaultAsync(c => c.Id== id);
+
+            if (await TryUpdateModelAsync<StudentClass>(courseToUpdate,
+                "",
+                c => c.Id, c => c.ClassId, c => c.StudentsId))
+            {
+                try
+                {
+                    await _context.SaveChangesAsync();
+                }
+                catch (DbUpdateException /* ex */)
+                {
+                    //Log the error (uncomment ex variable name and write a log.)
+                    ModelState.AddModelError("", "Unable to save changes. " +
+                        "Try again, and if the problem persists, " +
+                        "see your system administrator.");
+                }
+                return RedirectToAction(nameof(Index));
+            }
+            PopulateDepartmentsDropDownList(courseToUpdate.ClassId);
+            PopulateDepartmentsDropDownList(courseToUpdate.StudentsId);
+            return View(courseToUpdate);
+            /*
             if (id != studentClass.Id)
             {
                 return NotFound();
@@ -167,9 +221,30 @@ namespace GetJob.Controllers
             }
             ViewData["ClassId"] = new SelectList(_context.Classes, "Id", "Id", studentClass.ClassId);
             ViewData["StudentsId"] = new SelectList(_context.Students, "Id", "Id", studentClass.StudentsId);
-            return View(studentClass);
+            return View(studentClass);*/
         }
+        private void PopulateDepartmentsDropDownList(object selectedStudents = null, object selectedClass = null, object selectedClasses = null)
+        {
+            var studentsQuery = from a in _context.Students
 
+                                orderby a.Name select a ;
+
+            ViewBag.StudentsId = new SelectList(studentsQuery.AsNoTracking(),
+                                                "StudentsId",
+                                                "Name",
+                                                
+                                                selectedStudents);
+            var classesQuery = from a in _context.Classes
+
+                                orderby a.Time
+                                select a;
+
+            ViewBag.Classes = new SelectList(classesQuery.AsNoTracking(),
+                                                "classesId",
+                                                "Time",
+
+                                                selectedClasses);
+        }
         // GET: StudentClasses1/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
