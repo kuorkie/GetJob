@@ -77,6 +77,7 @@ namespace GetJob.Controllers
             var studentClass = await _context.StudentClasses
                 .Include(s => s.Class)
                 .Include(s => s.Students)
+                .AsNoTracking()
                 .Include(s => s.Class.Subjects)
                 .Include(s => s.Class.Classroom)
                 .Include(s => s.Class.Teachers)
@@ -93,14 +94,15 @@ namespace GetJob.Controllers
         [HttpGet]
         public IActionResult Create()
         {
-               
-              ViewData["ClassId"] = new SelectList(_context.Classes, "Id", "Time");
-               ViewData["StudentsId"] = new SelectList(_context.Students, "Id", "Surname");
-           
 
-              
+            ViewData["ClassId"] = new SelectList(_context.Classes, "Id", "Time");
+              ViewData["StudentsId"] = new SelectList(_context.Students, "Id", "Surname");
+           // PopulateDepartmentsDropDownList();
 
-            
+
+
+
+
             return View();
 
             
@@ -125,15 +127,16 @@ namespace GetJob.Controllers
                 return RedirectToAction(nameof(Index));
 
             }
-          
 
+            
                  
             ViewData["ClassId"] = new SelectList(_context.Classes, "Id", "Time",studentClass.Class.Time);
 
             ViewData["StudentsId"] = new SelectList(_context.Students, "Id", "Name", studentClass.Students.Name);
 
             
-          
+           /* PopulateDepartmentsDropDownList(studentClass.StudentsId);
+            PopulateDepartmentsDropDownList(studentClass.ClassId);*/
             return View(studentClass);
         }
 
@@ -256,6 +259,7 @@ namespace GetJob.Controllers
             var studentClass = await _context.StudentClasses
                 .Include(s => s.Class)
                 .Include(s => s.Students)
+                .AsNoTracking()
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (studentClass == null)
             {

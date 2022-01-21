@@ -13,7 +13,7 @@ namespace CleanArchitecture.DomainCore.Models
         public string Surname { get; set; }
         public string Name_of_Course { get; set; }
         public int Number_of_Course { get; set; }
-
+        public string Nation { get; set; }
         public string Date_of_Birth { get; set; }
         public string Student_Image { get; set; }
 

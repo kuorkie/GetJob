@@ -68,7 +68,7 @@ namespace GetJob.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Name,Surname,Name_of_Course,Number_of_Course,Date_of_Birth,Student_Image")] Students students)
+        public async Task<IActionResult> Create([Bind("Id,Name,Surname,Name_of_Course,Number_of_Course,Nation,Date_of_Birth,Student_Image")] Students students)
         {
             if (ModelState.IsValid)
             {
@@ -102,7 +102,7 @@ namespace GetJob.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,Surname,Name_of_Course,Number_of_Course,Date_of_Birth,Student_Image")] Students students)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,Surname,Name_of_Course,Number_of_Course,Nation,Date_of_Birth,Student_Image")] Students students)
         {
             if (id != students.Id)
             {

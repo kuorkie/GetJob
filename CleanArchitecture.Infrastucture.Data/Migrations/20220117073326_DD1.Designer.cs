@@ -4,14 +4,16 @@ using CleanArchitecture.Infrastucture.Data.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace CleanArchitecture.Infrastucture.Data.Migrations
 {
     [DbContext(typeof(GetJobDbContext))]
-    partial class GetJobDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220117073326_DD1")]
+    partial class DD1
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

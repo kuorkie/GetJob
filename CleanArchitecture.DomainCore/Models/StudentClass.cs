@@ -11,6 +11,7 @@ namespace CleanArchitecture.DomainCore.Models
         public int Id { get; set; }
         public int ClassId { get; set; }
         public int StudentsId { get; set; }
+        
         public Classes Class { get; set; }
         public Students Students { get; set; }
     }
