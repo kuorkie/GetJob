@@ -34,5 +34,7 @@ namespace GetJob.Data
             modelBuilder.Entity<Users>().HasData(new Users[] { adminUser });
             base.OnModelCreating(modelBuilder);
         }
+
+       
     }
 }

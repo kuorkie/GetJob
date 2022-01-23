@@ -21,16 +21,17 @@
             <span asp-validation-for="ConfirmPassword" />
         </div>
         <div>
-            
+
             <p>
                 Студент/Преподаватель
             </p>
-                <p>
-                    <input type="text" name="text" />
-                    </p>
 
-                
             
+                @Html.DropDownListFor(model => model.Name, (SelectList)ViewBag.Roles, "--Choose Role--")
+                <input type="hidden" name="Name" />
+
+            
+
         </div>
         <div>
             <input type="submit" value="Регистрация" />
